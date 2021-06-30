@@ -158,7 +158,7 @@ async function readData() {
     let salt = sha256(sessionStorage.getItem("user") + "add-on" + sessionStorage.getItem("pass"))
                 
     for(let i = 0; i < acounts.length; i++){
-        if(salt = acounts[i].split("|")[0]){
+        if(salt === acounts[i].split("|")[0]){
             console.log('Success Getting Acount!');
 
             acountId = i
@@ -166,6 +166,8 @@ async function readData() {
             break
         }
     }
+
+    console.log(acountId)
 
     var acountData = acounts[acountId].split("|")
     var acountAddons = []

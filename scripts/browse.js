@@ -12,8 +12,6 @@ async function readData() {
         console.log(i)
 
         addonData = addons[i-1].split("|")
-
-        
         
         document.getElementById("featured-" + i.toString()).children[0].children[0].setAttribute("src", "img/" + addonData[4])
         document.getElementById("featured-" + i.toString()).children[1].children[0].innerHTML = addonData[1]
