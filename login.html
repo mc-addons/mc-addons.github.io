@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MC Addons</title>
+        <meta name="description" content="A place to display addons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/base.css">
+        <script src="https://kit.fontawesome.com/c5ed9bd98e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/loader.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function() {emailjs.init('user_H3DcG7B2zfNHQGl6q40Q6');})();</script>
+    </head>
+    <body>      
+        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
+
+        <div class="pop-up" id="error-popup">
+            <div class="pop-up-back">
+                <p></p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <a href="index.html" class="fas fa-home fa-2x header-home"></a>
+
+            <div class="header-social">
+                <a href="https://www.youtube.com/channel/UCxnklGcKbV1isCVary0XD1Q" class="fab fa-youtube fa-2x header-social-link" target="_blank"></a>
+                <a href="https://twitter.com/CloudOuter" class="fab fa-twitter fa-2x header-social-link" target="_blank"></a>
+            </div>
+        </header>
+        
+        <main>
+            <h1>Log In To Dev Acount</h1>
+
+            <div class="login-user">
+                <p>Username:</p>
+                <input type="text" id="user">
+            </div>
+
+            <div class="login-user">
+                <p>Password</p>
+                <input type="password" id="pass">
+            </div>
+
+            <button class="login-submit" id="submit">Log In</button>
+
+            <button class="login-create"  data-is-link data-target-location="signup.html">Create An Acount</button>
+        </main>
+
+        <script>
+            onLoadEvents = []
+        </script>
+
+        <script src="scripts/main.js"></script>
+        <script src="scripts/loader.js"></script>
+        <script src="scripts/login.js"></script>        
+    </body>
+</html>

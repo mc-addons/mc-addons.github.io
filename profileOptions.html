@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MC Addons</title>
+        <meta name="description" content="A place to display addons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/base.css">
+        <script src="https://kit.fontawesome.com/c5ed9bd98e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/loader.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function() {emailjs.init('user_H3DcG7B2zfNHQGl6q40Q6');})();</script>
+    </head>
+    <body>      
+        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
+
+        <div class="pop-up" id="delete-popup">
+            <div class="pop-up-back">
+                <p>Are you sure you want to delete your acount? <span class="important">This CAN NOT be undone!</span> It might take a couple of days for the acount to be removed.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                    <button class="important-button pop-up-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pop-up" id="save-popup">
+            <div class="pop-up-back">
+                <p>Are you sure you want to save? It might take a couple of days for the options to change.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                    <button class="important-button pop-up-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <header>
+
+            <div class="header-nav">
+                <a href="index.html" class="fas fa-home fa-2x header-console-home"></a>
+
+                <a href="index.html" class="fas fa-sign-out-alt fa-2x header-console-home" id="header-log-out"></a>
+
+                <a href="console.html" class="fas fa-user fa-2x header-console-home"></a>
+            </div>
+
+            <div class="header-social">
+                <a href="https://www.youtube.com/channel/UCxnklGcKbV1isCVary0XD1Q" class="fab fa-youtube fa-2x header-social-link" target="_blank"></a>
+
+                <a href="https://twitter.com/CloudOuter" class="fab fa-twitter fa-2x header-social-link" target="_blank"></a>
+            </div>
+        </header>
+        
+        <main>
+            <h1>Profile Options</h1>
+
+            <div class="options-container">
+                <div class="labeled-input">
+                    <p>Username</p>
+                    <input type="text" id="user">
+                </div>
+
+                <button class="acount-save" id="save">Save</button>
+
+                <button class="important-button acount-delete" id="delete">Delete Acount</button>
+            </div>
+        </main>
+
+        <script>
+            onLoadEvents = []
+        </script>
+
+        <script src="scripts/main.js"></script>
+        <script src="scripts/profileOptions.js"></script>
+        <script src="scripts/loader.js"></script>
+    </body>
+</html>

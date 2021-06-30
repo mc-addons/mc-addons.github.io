@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MC Addons</title>
+        <meta name="description" content="A place to display addons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/base.css">
+        <script src="https://kit.fontawesome.com/c5ed9bd98e.js" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function() {emailjs.init('user_H3DcG7B2zfNHQGl6q40Q6');})();</script>
+        <link rel="stylesheet" href="css/loader.css">
+    </head>
+    <body>      
+        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
+
+        <div class="pop-up" id="submit-popup">
+            <div class="pop-up-back">
+                <p>Are you sure you want to publish these edits to this addon? It might take a couple of days for the changes to show up.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                    <button class="important-button pop-up-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-nav">
+                <a href="index.html" class="fas fa-home fa-2x header-console-home"></a>
+
+                <a href="index.html" class="fas fa-sign-out-alt fa-2x header-console-home" id="header-log-out"></a>
+
+                <a href="console.html" class="fas fa-user fa-2x header-console-home"></a>
+            </div>
+
+            <div class="header-social">
+                <a href="https://www.youtube.com/channel/UCxnklGcKbV1isCVary0XD1Q" class="fab fa-youtube fa-2x header-social-link" target="_blank"></a>
+                <a href="https://twitter.com/CloudOuter" class="fab fa-twitter fa-2x header-social-link" target="_blank"></a>
+            </div>
+        </header>
+        
+        <main>
+            <input class="addon-title" id="addon-title" maxlength="20"></input>
+
+            <textarea id="addon-description">Lorem :) ;)</textarea>
+
+            <p id="addon-author">Created By: No One</p>
+
+            <div class="addon-link-edit-container">
+                <input id="addon-link-edit" placeholder="Link To Download..."></input>
+            </div>
+
+            <button class="addon-publish">Publish Edits</button>
+        </main>
+
+        <script>
+            onLoadEvents = []
+        </script>
+
+        <script src="scripts/main.js"></script>
+        <script src="scripts/editAddon.js"></script>
+        <script src="scripts/loader.js"></script>
+    </body>
+</html>

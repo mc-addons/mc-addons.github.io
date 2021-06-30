@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MC Addons</title>
+        <meta name="description" content="A place to display addons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/base.css">
+        <script src="https://kit.fontawesome.com/c5ed9bd98e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/loader.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+        <script type="text/javascript">(function() {emailjs.init('user_H3DcG7B2zfNHQGl6q40Q6');})();</script>
+    </head>
+    <body>      
+        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
+
+        <div class="pop-up" id="delete-popup">
+            <div class="pop-up-back">
+                <p>Are you sure you want to delete an addon? <span class="important">This CAN NOT be undone!</span> It might take a couple of days for the addon to be removed from your acount.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                    <button class="important-button pop-up-cancel">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pop-up" id="okay-popup">
+            <div class="pop-up-back">
+                <p>This add-on is in the process of being deleted.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="pop-up" id="deleted-popup">
+            <div class="pop-up-back">
+                <p>Everything seems to be okay with this add-on. This could be inacurate if you recently cleared your browsing data.</p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <header>
+
+            <div class="header-nav">
+                <a href="index.html" class="fas fa-home fa-2x header-console-home"></a>
+
+                <a href="index.html" class="fas fa-sign-out-alt fa-2x header-console-home" id="header-log-out"></a>
+
+                <a href="#" class="fas fa-user fa-2x header-console-home"></a>
+            </div>
+
+            <div class="header-social">
+                <a href="https://www.youtube.com/channel/UCxnklGcKbV1isCVary0XD1Q" class="fab fa-youtube fa-2x header-social-link" target="_blank"></a>
+
+                <a href="https://twitter.com/CloudOuter" class="fab fa-twitter fa-2x header-social-link" target="_blank"></a>
+            </div>
+        </header>
+        
+        <main>
+            <h1>Your Dev Acount</h1>
+
+            <div class="console-nav">
+                <button data-is-link data-target-location="submit.html">Submit Addon</button>
+
+                <button data-is-link data-target-location="profileOptions.html">Profile Options</button>
+            </div>
+
+            <div class="sumbissions-container">
+                <div class="submission" id="submission-0">
+                    <p class="submission-name">Not Loaded...</p>
+                    <button class="fas fa-check fa-2x sucsess submission-edit data-target-location" id="sucsess"></button>
+                    <button class="fas fa-exclamation-triangle error fa-2x submission-edit data-target-location" id="error"></button>
+                    <button class="fas fa-circle-notch fa-2x loading submission-edit data-target-location" id="loading"></button>
+                    <button class="fas fa-pen fa-2x submission-edit data-target-location"></button>
+                    <button class="fas fa-trash fa-2x submission-edit"></button>
+                </div>
+            </div>
+        </main>
+
+        <script>
+            onLoadEvents = []
+        </script>
+
+        <script src="scripts/main.js"></script>
+        <script src="scripts/console.js"></script>
+        <script src="scripts/loader.js"></script>
+    </body>
+</html>

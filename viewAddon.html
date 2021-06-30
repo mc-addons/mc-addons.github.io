@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>MC Addons</title>
+        <meta name="description" content="A place to display addons">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/base.css">
+        <script src="https://kit.fontawesome.com/c5ed9bd98e.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="css/loader.css">
+    </head>
+    <body>      
+        <div class="loader is-active" data-js-loaded-content></div>
+
+        <header>
+            <a href="index.html" class="fas fa-home fa-2x header-home"></a>
+
+            <div class="search-container">
+                <input type="search" id="search" placeholder="Search . . .">
+                <button class="fas fa-search fa-lg search-button"></button>
+            </div>
+
+            <div class="header-social">
+                <a href="https://www.youtube.com/channel/UCxnklGcKbV1isCVary0XD1Q" class="fab fa-youtube fa-2x header-social-link" target="_blank"></a>
+                <a href="https://twitter.com/CloudOuter" class="fab fa-twitter fa-2x header-social-link" target="_blank"></a>
+            </div>
+        </header>
+        
+        <main>
+            <h5 id="addon-title">An Addon...</h5>
+
+            <p id="addon-description">Lorem :) ;)</p>
+
+            <p id="addon-author">Created By: No One</p>
+
+            <button id="addon-download" data-is-link data-target-location="index.html">Download!</button>
+        </main>
+
+        <script src="scripts/main.js"></script>
+        <script src="scripts/viewAddon.js"></script>
+        <script src="scripts/loader.js"></script>
+    </body>
+</html>
