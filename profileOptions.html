@@ -12,7 +12,16 @@
         <script type="text/javascript">(function() {emailjs.init('user_H3DcG7B2zfNHQGl6q40Q6');})();</script>
     </head>
     <body>      
-        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
+        <div class="loader is-active" data-on-load-events></div>
+
+        <div class="pop-up" id="error-popup">
+            <div class="pop-up-back">
+                <p></p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                </div>
+            </div>
+        </div>
 
         <div class="pop-up" id="delete-popup">
             <div class="pop-up-back">
@@ -65,6 +74,10 @@
                 <button class="important-button acount-delete" id="delete">Delete Acount</button>
             </div>
         </main>
+
+        <footer>
+            <p>Contact us at mcaddons.submit@gmail.com for help, questions, concerns, or feedback!</p>
+        </footer>
 
         <script>
             onLoadEvents = []

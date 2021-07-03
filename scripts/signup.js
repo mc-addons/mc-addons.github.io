@@ -109,43 +109,58 @@ function toggleErrorPopup(message = ""){
     }
 }
 
+function toggleSignupPopup(){
+    let popupEl = document.getElementById("signup-popup")
+
+    if(popupEl.classList.contains("is-active")){
+        popupEl.classList.remove("is-active")
+        popupEl.children[0].classList.remove("is-active")
+    }else{
+        popupEl.classList.add("is-active")
+        popupEl.children[0].classList.add("is-active")
+    }
+}
+
+async function getDataFromFile(fileDir) {
+    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/' + fileDir
+    const response = await fetch(dataUrl)
+    const data = await response.text()
+
+    return data
+}
+
+async function checkForAcount(salt){
+    result = await getDataFromFile("acounts/" + salt + ".acount")
+
+    console.log(result)
+   
+    if(result === "404: Not Found"){
+        return false
+    } 
+
+    return true
+}
+
 var suc = false
 
 var animTime = 300
+
+async function signUp(){
+    let salt = sha256(document.getElementById('user').value.replaceAll(/[|*]/g, "") + "add-on" + document.getElementById('pass').value.replaceAll(/[|*]/g, "")) 
+
+    if(await checkForAcount(salt)){
+        toggleErrorPopup("That acount already exists!")
+    }else{
+        toggleSignupPopup()
+    }
+}
 
 onLoadEvents.push(function () {
     document.getElementById('submit').addEventListener('click', function(event) {
         event.preventDefault();
 
         if(document.getElementById('name').value.length > 0 && !suc && document.getElementById('user').value.length > 2 && document.getElementById('pass').value.length >= 5){
-            console.log("Submitted...")
-
-            var templateParams = {
-                format_type: "signup",
-                data: document.getElementById('name').value + "|" + document.getElementById('user').value + "|" + sha256(document.getElementById('user').value + "add-on" + document.getElementById('pass').value) 
-            };
-
-            suc = true
-            
-            // these IDs from the previous steps
-            emailjs.send('service_oabk5gc', 'template_pdp0wua', templateParams).then(function() {
-                console.log('SUCCESS!');
-
-                const transitionEl = document.querySelector(".loader")
-
-                transitionEl.classList.add("is-active")
-                transitionEl.classList.remove("ready")
-
-                setTimeout(() => {
-                    window.location.href = "login.html"
-                }, animTime)
-            }, function(error) {
-                console.log('FAILED...', error);
-
-                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Silverfish</span>')
-
-                suc = false
-            });
+            signUp()
         }else if(document.getElementById('name').value.length == 0){
             toggleErrorPopup("You need to put a name!")
         }else if(document.getElementById('user').value.length <= 2){
@@ -159,6 +174,45 @@ onLoadEvents.push(function () {
         e.preventDefault()
 
         toggleErrorPopup()
+    })
+
+    document.getElementById("signup-popup").children[0].children[1].children[0].addEventListener("click", e => {
+        e.preventDefault()
+
+        console.log("Submitted...")
+
+        var templateParams = {
+            format_type: "signup",
+            data: document.getElementById('name').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('user').value.replaceAll(/[|*]/g, "") + "|" + sha256(document.getElementById('user').value.replaceAll(/[|*]/g, "") + "add-on" + document.getElementById('pass').value.replaceAll(/[|*]/g, "")) 
+        };
+
+        suc = true
+        
+        // these IDs from the previous steps
+        emailjs.send('service_oabk5gc', 'template_pdp0wua', templateParams).then(function() {
+            console.log('SUCCESS!');
+
+            const transitionEl = document.querySelector(".loader")
+
+            transitionEl.classList.add("is-active")
+            transitionEl.classList.remove("ready")
+
+            setTimeout(() => {
+                window.location.href = "login.html"
+            }, animTime)
+        }, function(error) {
+            console.log('FAILED...', error);
+
+            toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Silverfish</span>')
+
+            suc = false
+        });
+    })
+
+    document.getElementById("signup-popup").children[0].children[1].children[1].addEventListener("click", e => {
+        e.preventDefault()
+
+        toggleSignupPopup()
     })
 })
 

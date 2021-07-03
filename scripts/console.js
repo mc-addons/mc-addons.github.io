@@ -104,6 +104,14 @@ var acounts = []
 var addonToDelete = "-1"
 var suc = false
 
+async function getDataFromFile(fileDir) {
+    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/' + fileDir
+    const response = await fetch(dataUrl)
+    const data = await response.text()
+
+    return data
+}
+
 function toggleDeletePopup(){
     let popupEl = document.getElementById("delete-popup")
 
@@ -140,52 +148,37 @@ function toggleDeletedInfoPopup(){
     }
 }
 
+function toggleErrorPopup(message = ""){
+    let popupEl = document.getElementById("error-popup")
+
+    if(popupEl.classList.contains("is-active")){
+        popupEl.classList.remove("is-active")
+        popupEl.children[0].classList.remove("is-active")
+    }else{
+        popupEl.children[0].children[0].innerHTML = message
+
+        popupEl.classList.add("is-active")
+        popupEl.children[0].classList.add("is-active")
+    }
+}
+
 async function readData() {
-    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/posts.gdl'
-    const acountsUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/devacounts.gdl'
-    const response = await fetch(dataUrl);
-    const data = await response.text();
-    //console.log(data);
-    const acountsResponse = await fetch(acountsUrl);
-    const acountsData = await acountsResponse.text();
-    //console.log(acountsData);
-
-    addons = data.split("*\n")
-    acounts = acountsData.split("*\n")
-
-    let acountId = -1
-
     let salt = sha256(sessionStorage.getItem("user") + "add-on" + sessionStorage.getItem("pass"))
-                
-    for(let i = 0; i < acounts.length; i++){
-        if(salt === acounts[i].split("|")[0]){
-            console.log('Success Getting Acount!');
 
-            acountId = i
+    let acountData = await getDataFromFile("acounts/" + salt + ".acount");
 
-            break
-        }
+    console.log(acountData)
+
+    acountData = acountData.split("|")
+
+    let acountAddons = []
+
+    for(let i = 1; i < acountData.length; i++){
+        addonData = await getDataFromFile("addons/" + acountData[i] + ".addon") 
+        acountAddons.push(addonData)
     }
 
-    console.log(acountId)
-
-    var acountData = acounts[acountId].split("|")
-    var acountAddons = []
-
-    for(let i = 2; i < acountData.length; i++){
-        let uuid = acountData[i]
-        let id = -1
-
-        for(let i = 0; i < addons.length; i++){
-            if(addons[i].split("|")[0] === uuid){
-                id = i
-            }
-        }
-
-        acountAddons.push(addons[id])
-    }
-
-    console.log(acountAddons)
+    console.log(acountData)
 
     if(acountAddons.length === 0){
         document.getElementById("submission-0").remove();
@@ -296,6 +289,10 @@ onLoadEvents.push(function(){
             }, function(error) {
                 console.log('FAILED...', error);
 
+                toggleDeletePopup()
+
+                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: TNT</span>')
+
                 suc = false
             });
         }
@@ -317,5 +314,11 @@ onLoadEvents.push(function(){
         e.preventDefault()
 
         toggleDeletedInfoPopup();
+    })
+
+    document.getElementById("error-popup").children[0].children[1].children[0].addEventListener("click", e => {
+        e.preventDefault()
+
+        toggleErrorPopup()
     })
 })

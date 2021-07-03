@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/loader.css">
     </head>
     <body>      
-        <div class="loader is-active" data-js-loaded-content></div>
+        <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
 
         <header>
             <a href="index.html" class="fas fa-home fa-2x header-home"></a>
@@ -27,53 +27,65 @@
         </header>
         
         <main>
-            <div class="card-row">
-                <div class="card" id="browse-1">
-                    <div class="card-img-container">
-                        <img src="img/OuterCastles.png">
+            <div class="browse-cards">
+                <div class="card-row">
+                    <div class="card" id="browse-1">
+                        <div class="card-img-container">
+                            <img src="img/OuterCastles.png">
+                        </div>
+
+                        <div class="card-content">
+                            <h3>Outer Castles</h3>
+
+                            <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
+
+                            <button data-is-link data-target-location="index.html">Get It!</button>
+                        </div>
                     </div>
 
-                    <div class="card-content">
-                        <h3>Outer Castles</h3>
+                    <div class="card" id="browse-2">
+                        <div class="card-img-container">
+                            <img src="img/OuterCastles.png">
+                        </div>
 
-                        <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
+                        <div class="card-content">
+                            <h3>Outer Castles</h3>
 
-                        <button data-is-link data-target-location="index.html">Get It!</button>
-                    </div>
-                </div>
+                            <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
 
-                <div class="card" id="browse-2">
-                    <div class="card-img-container">
-                        <img src="img/OuterCastles.png">
-                    </div>
-
-                    <div class="card-content">
-                        <h3>Outer Castles</h3>
-
-                        <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
-
-                        <button data-is-link data-target-location="index.html">Get It!</button>
-                    </div>
-                </div>
-
-                <div class="card" id="browse-3">
-                    <div class="card-img-container">
-                        <img src="img/OuterCastles.png">
+                            <button data-is-link data-target-location="index.html">Get It!</button>
+                        </div>
                     </div>
 
-                    <div class="card-content">
-                        <h3>Outer Castles</h3>
+                    <div class="card" id="browse-3">
+                        <div class="card-img-container">
+                            <img src="img/OuterCastles.png">
+                        </div>
 
-                        <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
+                        <div class="card-content">
+                            <h3>Outer Castles</h3>
 
-                        <button data-is-link data-target-location="index.html">Get It!</button>
+                            <p>An add-on to Minecraft that adds crazy new castles to loot and explore! Inspired by Warhead and Syko’s Dungeon Expanse add-on!</p>
+
+                            <button data-is-link data-target-location="index.html">Get It!</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            <button id="load-more">Load More</button>
         </main>
 
+        <footer>
+            <p>Contact us at mcaddons.submit@gmail.com for help, questions, concerns, or feedback!</p>
+        </footer>
+
+        <script>
+            onLoadEvents = []
+        </script>
+
         <script src="scripts/main.js"></script>
-        <script src="scripts/home.js"></script>
+        <script src="scripts/browse.js"></script>
         <script src="scripts/loader.js"></script>
     </body>
 </html>

@@ -2,20 +2,24 @@ const id = location.search.substring(4)
 
 var acounts = []
 
-async function readData() {
-    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/devacounts.gdl'
-    const response = await fetch(dataUrl);
-    const data = await response.text();
-    console.log(data);
+async function getDataFromFile(fileDir) {
+    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/' + fileDir
+    const response = await fetch(dataUrl)
 
-    acounts = data.split("*\n")
-
-    const transitionEl = document.querySelector(".loader")
-
-    transitionEl.setAttribute("data-js-loaded-content-done", "!")
+    return response.text()
 }
 
-readData();
+async function checkForAcount(salt){
+    result = await getDataFromFile("acounts/" + salt + ".acount")
+
+    console.log(result)
+   
+    if(result === "404: Not Found"){
+        return false
+    } 
+
+    return true
+}
 
 var sha256 = function sha256(ascii) {
     function rightRotate(value, amount) {
@@ -135,7 +139,7 @@ var suc = false
 var animTime = 300
 
 onLoadEvents.push(function () {
-    document.getElementById('submit').addEventListener('click', function(event) {
+    document.getElementById('submit').addEventListener('click', async function(event) {
         event.preventDefault();
 
         if(document.getElementById('user').value != "" && document.getElementById('pass').value != "" && !suc){
@@ -144,33 +148,23 @@ onLoadEvents.push(function () {
 
                 let salt = sha256(document.getElementById('user').value + "add-on" + document.getElementById('pass').value)
                 
-                found = false
+                if(await(checkForAcount(salt))){
+                    console.log('SUCCESS!');
 
-                for(let i = 0; i < acounts.length; i++){
-                    if(salt = acounts[i].split("|")[0]){
-                        console.log('SUCCESS!');
+                    sessionStorage.setItem('user', document.getElementById('user').value);
+                    sessionStorage.setItem('pass', document.getElementById('pass').value);
 
-                        sessionStorage.setItem('user', document.getElementById('user').value);
-                        sessionStorage.setItem('pass', document.getElementById('pass').value);
+                    suc=true
 
-                        suc=true
+                    const transitionEl = document.querySelector(".loader")
 
-                        const transitionEl = document.querySelector(".loader")
+                    transitionEl.classList.add("is-active")
+                    transitionEl.classList.remove("ready")
 
-                        transitionEl.classList.add("is-active")
-                        transitionEl.classList.remove("ready")
-
-                        setTimeout(() => {
-                            window.location.href = "console.html"
-                        }, animTime)
-
-                        found = true
-
-                        break
-                    }
-                }
-
-                if(!found){
+                    setTimeout(() => {
+                        window.location.href = "console.html"
+                    }, animTime)
+                }else{    
                     toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Redstone</span>')
                 }
             }

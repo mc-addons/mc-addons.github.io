@@ -1,23 +1,17 @@
-var addons = []
+async function getDataFromFile(fileDir) {
+    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/' + fileDir
+    const response = await fetch(dataUrl)
+    const data = await response.text()
+
+    return data
+}
 
 async function readData() {
-    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/posts.gdl'
-    const response = await fetch(dataUrl);
-    const data = await response.text();
-    console.log(data);
-
-    addons = data.split("*\n")
-
     let uuid = location.search.substring(4)
-    let id = -1
 
-    for(let i = 0; i < addons.length; i++){
-        if(addons[i].split("|")[0] === uuid){
-            id = i
-        }
-    }
+    let addonData = await getDataFromFile("addons/" + uuid + ".addon")
 
-    addonData = addons[id].split("|")
+    addonData = addonData.split("|")
 
     document.getElementById("addon-title").textContent = addonData[1]
     document.getElementById("addon-description").textContent = addonData[2]

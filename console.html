@@ -14,6 +14,15 @@
     <body>      
         <div class="loader is-active" data-js-loaded-content data-on-load-events></div>
 
+        <div class="pop-up" id="error-popup">
+            <div class="pop-up-back">
+                <p></p>
+                <div class="pop-up-actions">
+                    <button>Ok</button>
+                </div>
+            </div>
+        </div>
+
         <div class="pop-up" id="delete-popup">
             <div class="pop-up-back">
                 <p>Are you sure you want to delete an addon? <span class="important">This CAN NOT be undone!</span> It might take a couple of days for the addon to be removed from your acount.</p>
@@ -26,7 +35,7 @@
 
         <div class="pop-up" id="okay-popup">
             <div class="pop-up-back">
-                <p>This add-on is in the process of being deleted.</p>
+                <p>Everything seems to be okay with this add-on. This could be inacurate if you recently cleared your browsing data.</p>
                 <div class="pop-up-actions">
                     <button>Ok</button>
                 </div>
@@ -35,7 +44,7 @@
 
         <div class="pop-up" id="deleted-popup">
             <div class="pop-up-back">
-                <p>Everything seems to be okay with this add-on. This could be inacurate if you recently cleared your browsing data.</p>
+                <p>This add-on is in the process of being deleted.</p>
                 <div class="pop-up-actions">
                     <button>Ok</button>
                 </div>
@@ -79,6 +88,10 @@
                 </div>
             </div>
         </main>
+
+        <footer>
+            <p>Contact us at mcaddons.submit@gmail.com for help, questions, concerns, or feedback!</p>
+        </footer>
 
         <script>
             onLoadEvents = []

@@ -26,6 +26,21 @@ function toggleSubmitPopup(){
     }
 }
 
+function toggleErrorPopup(message = ""){
+    let popupEl = document.getElementById("error-popup")
+
+    if(popupEl.classList.contains("is-active")){
+        popupEl.classList.remove("is-active")
+        popupEl.children[0].classList.remove("is-active")
+    }else{
+        popupEl.children[0].children[0].innerHTML = message
+
+        popupEl.classList.add("is-active")
+        popupEl.children[0].classList.add("is-active")
+    }
+}
+
+
 onLoadEvents.push(function () {
     document.getElementById('submit').addEventListener('click', function(event) {
         event.preventDefault()
@@ -62,6 +77,9 @@ onLoadEvents.push(function () {
                 }, animTime)
             }, function(error) {
                 console.log('FAILED...', error);
+
+                toggleSubmitPopup()
+                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: George</span>')
 
                 suc = false
             });

@@ -99,10 +99,21 @@ var sha256 = function sha256(ascii) {
     return result;
 };
 
-var addons = []
-var acounts = []
-var addonToDelete = "-1"
 var suc = false
+
+function toggleErrorPopup(message = ""){
+    let popupEl = document.getElementById("error-popup")
+
+    if(popupEl.classList.contains("is-active")){
+        popupEl.classList.remove("is-active")
+        popupEl.children[0].classList.remove("is-active")
+    }else{
+        popupEl.children[0].children[0].innerHTML = message
+
+        popupEl.classList.add("is-active")
+        popupEl.children[0].classList.add("is-active")
+    }
+}
 
 function toggleDeletePopup(){
     let popupEl = document.getElementById("delete-popup")
@@ -128,41 +139,11 @@ function toggleSavePopup(){
     }
 }
 
-async function readData() {
-    const acountsUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/devacounts.gdl'
-    const acountsResponse = await fetch(acountsUrl);
-    const acountsData = await acountsResponse.text();
-
-    acounts = acountsData.split("*\n")
-
-    let acountId = -1
-
-    let salt = sha256(sessionStorage.getItem("user") + "add-on" + sessionStorage.getItem("pass"))
-                
-    for(let i = 0; i < acounts.length; i++){
-        if(salt === acounts[i].split("|")[0]){
-            console.log('Success Getting Acount!');
-
-            acountId = i
-
-            break
-        }
-    }
-
-    var acountData = acounts[acountId].split("|")
-
-    document.getElementById("user").value = acountData[1]
-
-    const transitionEl = document.querySelector(".loader")
-
-    transitionEl.setAttribute("data-js-loaded-content-done", "!")
-}
-
-readData();
-
 var animTime = 300
 
 onLoadEvents.push(function(){
+    document.getElementById("user").value = sessionStorage.getItem("user")
+
     const logOutButton = document.getElementById("header-log-out")
 
     logOutButton.addEventListener("click", function(){
@@ -207,6 +188,9 @@ onLoadEvents.push(function(){
             }, function(error) {
                 console.log('FAILED...', error);
 
+                toggleDeletePopup()
+                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Wither</span>')
+
                 suc = false
             });
         }
@@ -233,7 +217,7 @@ onLoadEvents.push(function(){
 
             var templateParams = {
                 format_type: "acount-change",
-                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + document.getElementById("user").value
+                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + document.getElementById("user").value.replaceAll(/[|*]/g, "")
             };
 
             // these IDs from the previous steps
@@ -250,6 +234,9 @@ onLoadEvents.push(function(){
                 }, animTime)
             }, function(error) {
                 console.log('FAILED...', error);
+
+                toggleSavePopup()
+                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Phantom</span>')
 
                 suc = false
             });

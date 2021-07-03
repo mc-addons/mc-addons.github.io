@@ -2,6 +2,14 @@ if(sessionStorage.getItem("user") === null){
     window.location.href = "index.html"
 }
 
+async function getDataFromFile(fileDir) {
+    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/' + fileDir
+    const response = await fetch(dataUrl)
+    const data = await response.text()
+
+    return data
+}
+
 function toggleSubmitPopup(){
     let popupEl = document.getElementById("submit-popup")
 
@@ -14,29 +22,26 @@ function toggleSubmitPopup(){
     }
 }
 
-const uuid = location.search.substring(4)
+function toggleErrorPopup(message = ""){
+    let popupEl = document.getElementById("error-popup")
 
-var addons = []
+    if(popupEl.classList.contains("is-active")){
+        popupEl.classList.remove("is-active")
+        popupEl.children[0].classList.remove("is-active")
+    }else{
+        popupEl.children[0].children[0].innerHTML = message
+
+        popupEl.classList.add("is-active")
+        popupEl.children[0].classList.add("is-active")
+    }
+}
+
+const uuid = location.search.substring(4)
 
 var suc = false
 
 async function readData() {
-    const dataUrl = 'https://raw.githubusercontent.com/outercloudstudio/MC-Addons-Data/main/posts.gdl'
-    const response = await fetch(dataUrl);
-    const data = await response.text();
-    console.log(data);
-
-    addons = data.split("*\n")
-
-    let id = -1
-
-    for(let i = 0; i < addons.length; i++){
-        if(addons[i].split("|")[0] === uuid){
-            id = i
-        }
-    }
-
-    addonData = addons[id].split("|")
+    addonData = await (await getDataFromFile("addons/" + uuid + ".addon")).split("|")
 
     let addonDescription = document.getElementById("addon-description")
 
@@ -51,8 +56,6 @@ async function readData() {
         e.target.style.height = 'auto';
         e.target.style.height = (e.target.scrollHeight)+'px';
     })
-
-    //data-is-link data-target-location
 
     const transitionEl = document.querySelector(".loader")
 
@@ -95,6 +98,9 @@ onLoadEvents.push(function () {
                 }, animTime)
             }, function(error) {
                 console.log('FAILED...', error);
+
+                toggleSubmitPopup()
+                toggleErrorPopup('There was an error! <br> <span class="important">Error Code: Dream</span>')
 
                 suc = false
             });
