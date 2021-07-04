@@ -599,7 +599,7 @@ input:focus, textarea:focus{
     display: flex;
 }
 
-#search{
+.search{
     flex-grow: 1;
     height: 100%;
 
@@ -619,7 +619,7 @@ input:focus, textarea:focus{
     text-align: left;
 }
 
-#search::placeholder{
+.search::placeholder{
     opacity: 1;
 }
 
@@ -941,17 +941,54 @@ footer{
     height: 5rem;
     width: 100%;
 
-    margin-top:  5rem;
-
     background-color: var(--dark);
 
     display: flex;
     justify-content: center;
     align-items: center;
+
+    bottom: calc(-20%);
+
+    position: absolute;
 }
 
 footer p{
     text-align: center;
     opacity: .5;
     font-size: 1rem;
+}
+
+#no-results{
+    text-align: center;
+}
+
+@media only screen and (max-width: 47rem) {
+    .card-row{
+        flex-direction: column;
+    }
+
+    .card{
+        margin-top: 2rem;
+    }
+
+    .main-nav{
+        display: none;
+    }
+
+    .header-home{
+        display: none !important;
+    }
+
+    .header-social{
+        display: none;
+    }
+
+    .search-container{
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    main{
+        width: 50%;
+    }
 }

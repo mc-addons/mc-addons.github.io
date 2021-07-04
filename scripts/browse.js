@@ -58,7 +58,7 @@ async function readData() {
             //console.log("browse-" + (i * cardsPerRow + j + 1).toString())
             document.getElementById("browse-" + (i * cardsPerRow + j + 1).toString()).children[0].children[0].setAttribute("src", "img/" + addonData[4])
             document.getElementById("browse-" + (i * cardsPerRow + j + 1).toString()).children[1].children[0].innerHTML = addonData[1]
-            document.getElementById("browse-" + (i * cardsPerRow + j + 1).toString()).children[1].children[1].innerHTML = addonData[2]
+            document.getElementById("browse-" + (i * cardsPerRow + j + 1).toString()).children[1].children[1].innerHTML = addonData[2].replaceAll("#br#", "\n")
             document.getElementById("browse-" + (i * cardsPerRow + j + 1).toString()).children[1].children[2].setAttribute("data-target-location", "http://127.0.0.1:5500/viewAddon.html?id=" + addonData[0])     
         }
     }
@@ -79,6 +79,30 @@ async function readData() {
             window.location.href = target
         }, animTime)              
     })
+
+    let searches = document.getElementsByClassName("search")
+
+    for(let i = 0; i < searches.length; i++){
+        searches[i].addEventListener("keyup", function(event){
+            if (event.keyCode === 13) {
+                // Cancel the default action, if needed
+                event.preventDefault();
+                // Trigger the button element with a click
+                searches[i].parentElement.children[1].click()
+            }
+        })
+
+        searches[i].parentElement.children[1].addEventListener("click", function(){
+            const transitionEl = document.querySelector(".loader")
+
+            transitionEl.classList.add("is-active")
+            transitionEl.classList.remove("ready")
+
+            setTimeout(() => {
+                window.location.href = "search.html?search=" + searches[i].parentElement.children[0].value
+            }, animTime)
+        })
+    }
 
     const transitionEl = document.querySelector(".loader")
 

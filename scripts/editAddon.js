@@ -46,7 +46,7 @@ async function readData() {
     let addonDescription = document.getElementById("addon-description")
 
     document.getElementById("addon-title").value = addonData[1]
-    addonDescription.value = addonData[2]
+    addonDescription.value = addonData[2].replaceAll("#br#", "\n")
     document.getElementById("addon-author").textContent = "Created By: " + addonData[3];
     document.getElementById("addon-link-edit").value = "https://" + addonData[5]
    
@@ -79,7 +79,7 @@ onLoadEvents.push(function () {
 
             var templateParams = {
                 format_type: "sub_edit",
-                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + uuid + "|" + document.getElementById('addon-title').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('addon-description').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('addon-link-edit').value.replaceAll(/[|*]/g, "")
+                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + uuid + "|" + document.getElementById('addon-title').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('addon-description').value.replaceAll(/[|*]/g, "").replaceAll(/[\n\r]/g, "#br#") + "|" + document.getElementById('addon-link-edit').value.replaceAll(/[|*]/g, "")
             };
 
             suc = true

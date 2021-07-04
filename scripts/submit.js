@@ -58,7 +58,7 @@ onLoadEvents.push(function () {
 
             var templateParams = {
                 format_type: "submit",
-                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + create_UUID() + "|" + document.getElementById('sub_name').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('sub_desc').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('sub_link').value.replaceAll(/[|*]/g, "")
+                data: sessionStorage.getItem("user") + "|" + sessionStorage.getItem("pass") + "|" + create_UUID() + "|" + document.getElementById('sub_name').value.replaceAll(/[|*]/g, "") + "|" + document.getElementById('sub_desc').value.replaceAll(/[|*]/g, "").replaceAll(/[\n\r]/g, "#br#") + "|" + document.getElementById('sub_link').value.replaceAll(/[|*]/g, "")
             };
 
             suc = true
